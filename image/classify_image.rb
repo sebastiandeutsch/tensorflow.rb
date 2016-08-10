@@ -1,7 +1,7 @@
 require 'tensorflow'
 def read_tensor_from_image(file_path)
   graph = Tensorflow::Graph.new
-  if file_path[file_path.size-3..file_path.size] == "jpg"
+  if File.extname(file_path) == ".jpg"
   	graph.read(File.dirname(__FILE__)+'/read_jpg_file.pb')
     graph.graph_def.node[0].attr[1] = Tensorflow::NodeDef::AttrEntry.new(key: "value",value: Tensorflow::AttrValue.new(
       tensor: Tensorflow::TensorProto.new(
